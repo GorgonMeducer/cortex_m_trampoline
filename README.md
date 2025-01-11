@@ -1,2 +1,2 @@
-# cortex_m_trampoline
-It is a template project for Cortex-M trampoline. 
+# Cortex-M Trampoline
+It is a template project for the Cortex-M trampoline. 
