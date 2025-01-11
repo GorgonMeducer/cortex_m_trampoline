@@ -103,20 +103,68 @@ void _ttywrch(int ch)
 #define DEFAULT_IRQ_HANDLER(handler_name)  \
 void __NO_RETURN __WEAK handler_name(void); \
 void handler_name(void) { \
-    while(1); \
+    while(1) __NOP(); \
 }
 
+
+#define __BL_ISR(__ISR_NAME)                                                    \
+extern                                                                          \
+__NO_RETURN                                                                     \
+void __ISR_NAME(void);                                                          \
+__NO_RETURN                                                                     \
+void __bl_##__ISR_NAME(void) {
+
+#define __BL_ISR_END(__ISR_NAME)                                                \
+    __ISR_NAME();                                                               \
+}
+
+#define BL_ISR(__ISR_NAME)      __BL_ISR(__ISR_NAME)
+#define BL_ISR_END(__ISR_NAME)  __BL_ISR_END(__ISR_NAME)
+
 /* Exceptions */
-DEFAULT_IRQ_HANDLER(__bl_NMI_Handler)
-DEFAULT_IRQ_HANDLER(__bl_HardFault_Handler)
-DEFAULT_IRQ_HANDLER(__bl_MemManage_Handler)
-DEFAULT_IRQ_HANDLER(__bl_BusFault_Handler)
-DEFAULT_IRQ_HANDLER(__bl_UsageFault_Handler)
-DEFAULT_IRQ_HANDLER(__bl_SecureFault_Handler)
-DEFAULT_IRQ_HANDLER(__bl_SVC_Handler)
-DEFAULT_IRQ_HANDLER(__bl_DebugMon_Handler)
-DEFAULT_IRQ_HANDLER(__bl_PendSV_Handler)
-DEFAULT_IRQ_HANDLER(__bl_SysTick_Handler)
+BL_ISR(NMI_Handler)
+BL_ISR_END(NMI_Handler)
+
+
+BL_ISR(HardFault_Handler)
+BL_ISR_END(HardFault_Handler)
+
+BL_ISR(MemManage_Handler)
+BL_ISR_END(MemManage_Handler)
+
+BL_ISR(BusFault_Handler)
+BL_ISR_END(BusFault_Handler)
+
+BL_ISR(UsageFault_Handler)
+BL_ISR_END(UsageFault_Handler)
+
+BL_ISR(SecureFault_Handler)
+BL_ISR_END(SecureFault_Handler)
+
+BL_ISR(SVC_Handler)
+BL_ISR_END(SVC_Handler)
+
+BL_ISR(DebugMon_Handler)
+BL_ISR_END(DebugMon_Handler)
+
+BL_ISR(PendSV_Handler)
+BL_ISR_END(PendSV_Handler)
+
+
+
+BL_ISR(SysTick_Handler)
+
+#if 0
+    /* some addtional code */
+    if (is_bl_running()) {
+        
+        /* bootloader systick isr code */
+        return ;
+    }
+#endif
+
+BL_ISR_END(SysTick_Handler)
+
 
 AT_ADDR(__ROM_BASE_ADDRESS)
 __USED

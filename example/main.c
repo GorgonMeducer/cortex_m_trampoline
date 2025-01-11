@@ -23,7 +23,7 @@
 
 void SysTick_Handler(void)
 {
-
+    __NOP();
 }
 
 
@@ -42,6 +42,8 @@ void app_platform_init(void)
 
 int main(void)
 {
+
+    init_cycle_counter(false);
 
     printf("Hello world! \r\n");
 
