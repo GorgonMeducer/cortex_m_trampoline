@@ -143,7 +143,7 @@ __USED
 AT_ADDR(__TRAMPOLINE_ENTRY_ADDRESS)
 void __trampoline_entry(void)
 {
-
+    __disable_irq();
 #if defined (__VTOR_PRESENT) && (__VTOR_PRESENT == 1U)
     SCB->VTOR = (uint32_t)(&__VECTOR_TABLE[0]);
 #endif

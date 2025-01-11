@@ -483,6 +483,7 @@ void Reset_Handler(void)
 #if defined (__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE == 3U)
     __TZ_set_STACKSEAL_S((uint32_t *)(&__STACK_SEAL));
 #endif
+    __enable_irq();
 
     SystemInit();                             /* CMSIS System Initialization */
     __PROGRAM_START();                        /* Enter PreMain (C library entry point) */
