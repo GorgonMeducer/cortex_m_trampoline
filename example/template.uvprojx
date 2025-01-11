@@ -397,12 +397,12 @@
             <File>
               <FileName>trampoline.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\trampoline.c</FilePath>
+              <FilePath>..\trampoline.c</FilePath>
             </File>
             <File>
               <FileName>trampoline_cfg.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\trampoline_cfg.h</FilePath>
+              <FilePath>..\trampoline_cfg.h</FilePath>
             </File>
           </Files>
         </Group>
