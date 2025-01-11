@@ -34,6 +34,20 @@
 
 #define AT_ADDR(__ADDR)     __AT_ADDR(__ADDR)
 
+#define __BL_ISR(__ISR_NAME)                                                    \
+extern                                                                          \
+__NO_RETURN                                                                     \
+void __ISR_NAME(void);                                                          \
+__NO_RETURN                                                                     \
+void __bl_##__ISR_NAME(void) {
+
+#define __BL_ISR_END(__ISR_NAME)                                                \
+    __ISR_NAME();                                                               \
+}
+
+#define BL_ISR(__ISR_NAME)      __BL_ISR(__ISR_NAME)
+#define BL_ISR_END(__ISR_NAME)  __BL_ISR_END(__ISR_NAME)
+
 /*============================ TYPES =========================================*/
 /*============================ GLOBAL VARIABLES ==============================*/
 
@@ -100,26 +114,6 @@ void _ttywrch(int ch)
  * Trampoline Entry                                                           *
  *----------------------------------------------------------------------------*/
 
-#define DEFAULT_IRQ_HANDLER(handler_name)  \
-void __NO_RETURN __WEAK handler_name(void); \
-void handler_name(void) { \
-    while(1) __NOP(); \
-}
-
-
-#define __BL_ISR(__ISR_NAME)                                                    \
-extern                                                                          \
-__NO_RETURN                                                                     \
-void __ISR_NAME(void);                                                          \
-__NO_RETURN                                                                     \
-void __bl_##__ISR_NAME(void) {
-
-#define __BL_ISR_END(__ISR_NAME)                                                \
-    __ISR_NAME();                                                               \
-}
-
-#define BL_ISR(__ISR_NAME)      __BL_ISR(__ISR_NAME)
-#define BL_ISR_END(__ISR_NAME)  __BL_ISR_END(__ISR_NAME)
 
 /* Exceptions */
 BL_ISR(NMI_Handler)
