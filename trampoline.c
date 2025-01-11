@@ -1,13 +1,14 @@
 /*============================ INCLUDES ======================================*/
+#ifdef _RTE_
+#   include "RTE_Components.h"
+#   include CMSIS_device_header
+#endif
+
 #include <cmsis_compiler.h>
 #include "perf_counter.h"
 
 #include "trampoline_cfg.h"
 
-#ifdef _RTE_
-#   include "RTE_Components.h"
-#   include CMSIS_device_header
-#endif
 
 /*============================ MACROS ========================================*/
 
