@@ -50,3 +50,10 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+Objects/*
+*@*
+*.uvguix.*
+RTE_Components.h
+Pre_Include_Global.h
+EventRecorderStub.scvd
+DebugConfig/Target_1_SSE-300-MPS3.dbgconf
